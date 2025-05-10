@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://<https://github.com/bastianCeronDuque/desarrollo-frontend-react>",
+  "homepage": "https://bastianceronduque.github.io/desarrollo-frontend-react",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
