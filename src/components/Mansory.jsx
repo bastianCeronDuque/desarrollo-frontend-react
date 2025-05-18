@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
-import slider1 from "../assets/slider/photo-1.avif";
+import slider1 from "../assets/img/banner-circulacion-25.jpg";
 import slider2 from "../assets/slider/photo-2.avif";
 import slider3 from "../assets/slider/photo-3.avif";
 import slider4 from "../assets/slider/photo-4.avif";
@@ -17,8 +17,8 @@ import slider4 from "../assets/slider/photo-4.avif";
 const itemData = [
   {
     img: slider1,
-    title: "Paisaje de Chol-Chol",
-    author: "@turismo_chile",
+    title: "Paga aqui tu permiso de circulacion",
+    author: "@chol-chol.cl",
     cols: 1,
   },
   {

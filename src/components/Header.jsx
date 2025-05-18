@@ -27,6 +27,7 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Divider from "@mui/joy/Divider";
 import slider3 from "../assets/slider/photo-3.avif";
+
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -55,12 +56,28 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const ultimaVista = localStorage.getItem("ultimaVista");
+    const hoy = new Date().toDateString();
+    if (!ultimaVista || ultimaVista !== hoy) {
+      setModalOpen(true);
+      localStorage.setItem("ultimaVista", "true");
+      
+    }
+    const temporizador = setTimeout(() => {
+      setModalOpen(true);
+    }, 10000);
+    if (!isMobile) {
+      setModalOpen(true);
+    }
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return (
+      () => clearTimeout(temporizador),
+      window.removeEventListener("scroll", handleScroll)
+    );
+  }, [isMobile]);
   return (
     <>
       <AppBar
@@ -82,17 +99,21 @@ const Header = () => {
             justifyContent: "center",
             "& > a": {
               color: "#fff",
-              fontSize: "20px",
+              fontSize: "17px",
               lineHeight: 1.35,
               fontWeight: 700,
-              letterSpacing: "0.7px",
+              letterSpacing: "0.3px",
               paddingRight: "22px",
               paddingLeft: "22px",
               textDecoration: "none",
-              transition: "color 0.3s",
+              transition: "color 1.5s",
               paddingTop: "7px",
               cursor: "pointer",
-              "&:hover": { backgroundColor: "#7d3269" },
+              textTransform: "uppercase",
+              "&:hover": {
+                backgroundColor: "#7d3269",
+                transition: "background-color 0.9s",
+              },
             },
           }}
         >
@@ -109,6 +130,7 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexGrow: 1,
 
               "& > a": {
                 marginRight: 2,
@@ -135,23 +157,44 @@ const Header = () => {
               justifyContent: "center",
               flexGrow: 1,
               alignItems: "center",
+              gap: "16px",
               fontSize: "21px",
+              position: "relative",
+              height: "100%",
               "&>a": {
-                marginRight: 2,
                 color: "text.primary",
                 textDecoration: "none",
                 transition: "color 0.3s",
-                "&:hover": { color: "#7d3269" },
+                position: "relative",
+                padding: "8px 0",
+                "&:hover": {
+                  color: "#7d3269",
+                  transition: "color 0.5s",
+                },
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "2px",
+                  backgroundColor: "#7d3269",
+                  transform: "scaleX(0)",
+                  transition: "transform 0.5s ease-in-out",
+                },
+                "&:hover::after": {
+                  transform: "scaleX(1)",
+                },
               },
             }}
           >
-            {/* Enlaces de navegación */}
+            {/*Inicio ciclo para enlaces de navegación */}
             {barraLinks.map((link) => (
               <Link key={link.label} href={link.href}>
                 {link.label}
               </Link>
             ))}
-
+            {/*Fin ciclo para enlaces de navegación */}
             {isMobile ? (
               // ✅ Floating Button en móvil
               <Box
@@ -187,7 +230,7 @@ const Header = () => {
                   textTransform: "none",
                   borderRadius: "5px",
                   backgroundColor: "#fff",
-                  color: "primary.main",
+                  color: "#3f51b5",
                   border: "2px solid #3f51b5",
                 }}
                 onClick={() => setModalOpen(true)}
@@ -253,11 +296,7 @@ const Header = () => {
               >
                 <CardOverflow>
                   <AspectRatio ratio="2">
-                    <img
-                      src={slider3}
-                      loading="lazy"
-                      alt=""
-                    />
+                    <img src={slider3} loading="lazy" alt="" />
                   </AspectRatio>
                 </CardOverflow>
                 <CardContent>

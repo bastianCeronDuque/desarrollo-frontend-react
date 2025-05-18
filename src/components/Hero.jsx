@@ -1,34 +1,61 @@
+import React, { useState, useRef, useEffect } from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 
+const fuenteVideos = [
+  "https://videos.pexels.com/video-files/27118848/12078068_2560_1440_60fps.mp4",
+  "https://videos.pexels.com/video-files/5790147/5790147-hd_1920_1080_30fps.mp4",
+  "https://videos.pexels.com/video-files/2330708/2330708-uhd_2560_1440_24fps.mp4",
+];
+
 const Hero = () => {
+  const [videoIndex, setVideoIndex] = useState(0);
+  const videoRef = useRef(null);
+  const [fade, setFade] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const handleEnded = () => {
+      setFade(true);
+      setTimeout(() => {
+        const nextIndex = (videoIndex + 1) % fuenteVideos.length;
+        setVideoIndex(nextIndex);
+        setFade(false);
+      }, 1000);
+    };
+
+    video?.addEventListener("ended", handleEnded);
+    return () => video?.removeEventListener("ended", handleEnded);
+  }, [videoIndex]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.load();
+      video.play().catch((err) => {
+        console.error("Error al reproducir el video:", err);
+      });
+    }
+  }, [videoIndex]);
   return (
     <Box sx={{ position: "relative", height: "90vh", overflow: "hidden" }}>
-      {/* Video de fondo */}
       <video
+        ref={videoRef}
+        src={fuenteVideos[videoIndex]}
         autoPlay
-        loop
         muted
-        playsInline //esto nos ayuda para visualizacion en dispositivos mobiles
+        preload="metadata"
+        playsInline
         style={{
           position: "absolute",
+          display:"flex",
           width: "100%",
           height: "100%",
           objectFit: "cover",
+          transition: "opacity 1s ease-in-out",
+          opacity: fade ? 0 : 1,
           zIndex: -1,
-          display: "flex",
         }}
-      >
-        {/* <source src="https://videos.pexels.com/video-files/31950589/13612594_1920_1080_60fps.mp4" type="video/mp4" /> */}
-        {
-          <source
-            src="https://videos.pexels.com/video-files/2330708/2330708-uhd_2560_1440_24fps.mp4"
-            type="video/mp4"
-          />
-        }
-        Tu navegador no soporta videos HTML5.
-      </video>
-
-      {/* Contenido superpuesto */}
+      />
       <Container
         maxWidth="lg"
         sx={{
