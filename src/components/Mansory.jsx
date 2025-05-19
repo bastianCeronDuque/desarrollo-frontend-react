@@ -10,9 +10,14 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import slider1 from "../assets/img/banner-circulacion-25.jpg";
-import slider2 from "../assets/slider/photo-2.avif";
-import slider3 from "../assets/slider/photo-3.avif";
-import slider4 from "../assets/slider/photo-4.avif";
+import slider2 from "../assets/img/img-sabores-chilenos.jpeg";
+import slider3 from "../assets/img/img-bote.jpeg";
+import slider4 from "../assets/img/img-mercado.jpeg";
+import slider5 from "../assets/img/img-pinones.jpeg";
+import slider6 from "../assets/img/img-iglesia.jpeg";
+import slider7 from "../assets/img/img-acondicionamiento.jpg";
+import slider8 from "../assets/img/img-municipalidad-cielo.png";
+import slider9 from "../assets/img/img-ciudad-cielo.jpg";
 // Datos de ejemplo (reemplaza con tus imágenes de Chol-Chol)
 const itemData = [
   {
@@ -22,14 +27,14 @@ const itemData = [
     cols: 1,
   },
   {
-    img: slider2,
+    img: slider5,
     title: "Cultura Mapuche",
-    author: "@artesania_araucania",
+    author: "@comida_araucania",
     cols: 1,
   },
   {
     img: slider3,
-    title: "Iglesia de Chol-Chol",
+    title: "Paisaje de Chol-Chol",
     author: "@patrimonio_chile",
     cols: 1,
   },
@@ -40,26 +45,32 @@ const itemData = [
     cols: 1,
   },
   {
-    img: slider1,
+    img: slider2,
     title: "Gastronomía Local",
     author: "@sabores_chilenos",
     cols: 1,
   },
   {
-    img: slider3,
+    img: slider6,
     title: "Iglesia de Chol-Chol",
     author: "@patrimonio_chile",
     cols: 1,
   },
   {
-    img: slider3,
-    title: "Iglesia de Chol-Chol",
+    img: slider7,
+    title: "Acondicionamiento fisico",
+    author: "@Accion",
+    cols: 1,
+  },
+  {
+    img: slider8,
+    title: "Municipalidad de Chol-Chol",
     author: "@patrimonio_chile",
     cols: 1,
   },
   {
-    img: slider3,
-    title: "Iglesia de Chol-Chol",
+    img: slider9,
+    title: "Ciudad de Chol-Chol",
     author: "@patrimonio_chile",
     cols: 1,
   },
